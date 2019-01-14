@@ -9,17 +9,27 @@ const logger = require('koa-logger')
 const index = require('./routes/index')
 const users = require('./routes/users')
 
+const config = require('../config');
 // error handler
 onerror(app)
 
 // middlewares
+
+// body parser中间件
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']
 }))
-app.use(json())
+
+// 
+// app.use(json())
+
+// 控制台日志中间件
 app.use(logger())
+
+// 静态资源加载中间件
 app.use(require('koa-static')(__dirname + '/public'))
 
+// 服务端模板渲染中间件
 app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
@@ -32,7 +42,7 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-// routes
+// 初始化routes
 app.use(index.routes(), index.allowedMethods())
 app.use(users.routes(), users.allowedMethods())
 
@@ -41,4 +51,5 @@ app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
 
-module.exports = app
+
+module.exports = app;
