@@ -1,15 +1,13 @@
 const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
-const json = require('koa-json')
+// const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
-const index = require('./routes/index')
-const users = require('./routes/users')
+const router = require('./routes/index');
 
-const config = require('../config');
 // error handler
 onerror(app)
 
@@ -27,7 +25,7 @@ app.use(bodyparser({
 app.use(logger())
 
 // 静态资源加载中间件
-app.use(require('koa-static')(__dirname + '/public'))
+app.use(require('koa-static')(__dirname + '../../public'))
 
 // 服务端模板渲染中间件
 app.use(views(__dirname + '/views', {
@@ -42,9 +40,9 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-// 初始化routes
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+
+// 初始化路由中间件
+app.use(router.routes());
 
 // error-handling
 app.on('error', (err, ctx) => {
