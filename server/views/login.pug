@@ -1,5 +1,27 @@
-extends layout
+extends ./templates/layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    .container-fluid
+                .row.clearfix
+                    .col-md-2.column
+                    .col-md-8.column
+                        form.form-horizontal(role='form')
+                            .form-group
+                                label.col-sm-2.control-label(for='inputUsername') Email
+                                .col-sm-10
+                                    input#inputUsername.form-control(type='email')
+                            .form-group
+                                label.col-sm-2.control-label(for='inputPassword3') Password
+                                .col-sm-10
+                                    input#inputPassword3.form-control(type='password')
+                            .form-group
+                                .col-sm-offset-2.col-sm-10
+                                    //- .checkbox
+                                    //-     label
+                                    //-         input(type='checkbox')
+                                    //-         | Remember me
+                            .form-group
+                                .col-sm-offset-2.col-sm-10
+                                    button.btn.btn-default(type='submit') Sign in
+                    .col-md-2.column
+    script(src='/javascripts/login.js')

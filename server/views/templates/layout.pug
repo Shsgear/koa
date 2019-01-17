@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        title= title
+        include ./head-scripts
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    body
+        nav.navbar.navbar-default(role='navigation')
+            .container-fluid
+                .navbar-header
+                    a.navbar-brand(href='#') Welcome
+                div
+                    ul.nav.navbar-nav.navbar-right
+                        li.dropdown
+                            a.dropdown-toggle(href='#', data-toggle='dropdown')
+                                | 用户名 
+                                b.caret
+                            ul.dropdown-menu
+                                li
+                                    a(href='#') 退出
+                                
+                                li.divider
+                                li
+                                    a(href='#') 注销
+
+        block content

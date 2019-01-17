@@ -1,5 +1,10 @@
-extends layout
+extends ./templates/layout
 
 block content
   h1= title
   p Welcome to #{title}
+  span 静态资源目录为：public/
+  ul
+  each img in existFiles
+    li=JSON.stringify(img)
+        img.preview-img(src=img.basePath, alt="")

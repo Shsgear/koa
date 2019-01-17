@@ -1,5 +1,31 @@
-extends layout
+extends ./templates/layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    .swiper-container
+        .swiper-wrapper
+            each img in rst
+                .swiper-slide 
+                    img(src=img.basePath, alt="")
+            
+        
+
+
+
+    include ./templates/foot-scripts
+    //- script(src="/javascripts/index.js")
+    script.
+        $(document).ready(function() {
+            $(".navbar").hide();
+    
+            var defaultConfig = {
+                autoplay : {
+                    delay: 4500,
+                    disableOnInteraction: false,
+                },
+                speed:800,
+                loop: true,
+            }
+            var mySwiper = new Swiper ('.swiper-container', !{(JSON.stringify(swiperConfig))} || defaultConfig)        
+        })
+    
+        
